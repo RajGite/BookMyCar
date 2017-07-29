@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "389576943387",
+    "firebase_url": "https://bookmycar-84d30.firebaseio.com",
+    "project_id": "bookmycar-84d30",
+    "storage_bucket": "bookmycar-84d30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389576943387:android:81c63a281bffd12e",
+        "android_client_info": {
+          "package_name": "com.example.sony.bookmycar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389576943387-tseij5pofutght1f11fluajccnpolp4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7HqLK00zGKRwWVNo9DcqVG9J_gwDlDqk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
