@@ -26,8 +26,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Passenger" />
-        <activity android:name=".Driver"></activity>
+        <activity android:name=".Driver" />
+        <activity
+            android:name=".Passenger"
+            android:label="@string/title_activity_passenger"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

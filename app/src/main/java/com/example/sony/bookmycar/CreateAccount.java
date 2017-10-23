@@ -74,11 +74,13 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == buttonSignup) {
 
+            progressDialog.setMessage("Registering User ...");
+            progressDialog.show();
+
             int radioButtonId = rg.getCheckedRadioButtonId();
             rb = (RadioButton) rg.findViewById(radioButtonId);
 
             final String User = (String) rb.getText();
-            Toast.makeText(this, User, Toast.LENGTH_SHORT).show();
             final String name = editTextName.getText().toString().trim();
             final String address = editTextAddress.getText().toString().trim();
             final String contact_no= editTextContact_no.getText().toString();
@@ -112,33 +114,30 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
             }
             /* if all feilds are filled register user by transfering all details to firebase server */
             if(password.equals(confirmpassword)) {
-                progressDialog.setMessage("Registering User ...");
-                progressDialog.show();
 
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    /*add details of user to firebase*/
+                                    UserInformation u = new UserInformation(name, address, contact_no, User, email);
+                                    pushData(u);
                                     progressDialog.dismiss();
                                     Toast.makeText(CreateAccount.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                    /*add details of user to firebase*/
+
                                     if (User.equals("Passenger")) {
-                                        UserInformation u = new UserInformation(name, address, contact_no, User, email);
-                                        pushData(u);
-                                        finish();
                                         startActivity(new Intent(getApplicationContext(), Passenger.class));
+                                        finish();
                                     }
                                     else if(User.equals("Driver")){
-                                        /*add details to driver node in firebase*/
-                                        UserInformation u = new UserInformation(name, address, contact_no, User, email);
-                                        pushData(u);
-                                        finish();
                                         startActivity(new Intent(getApplicationContext(), Driver.class));
+                                        finish();
                                     }
                                 }
                                 else {
-                                    Toast.makeText(CreateAccount.this, "Couldn't Register.Please try again", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    Toast.makeText(CreateAccount.this, "Either the EmailId is already registered or some technical problem occured.Please try again", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

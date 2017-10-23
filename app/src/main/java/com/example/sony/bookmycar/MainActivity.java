@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -49,17 +48,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(firebaseAuth.getCurrentUser()!=null)
         {
             //start passenger or driver activity accordingly
-            finish();
-            startActivity(new Intent(getApplicationContext(),Passenger.class));
+            dataBaseReference.child(firebaseAuth.getCurrentUser().getUid().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+
+                    try{
+                                           /*Extracts the user type from the node found*/
+                        String user=(String)snapshot.child("user").getValue();
+
+                        if(user.equals("Passenger")) {
+                            startActivity(new Intent(getApplicationContext(), Passenger.class));
+                            finish();
+                        }
+                        else if(user.equals("Driver")) {
+                            startActivity(new Intent(getApplicationContext(), Driver.class));
+                            finish();
+                        }
+
+                    } catch (Throwable e) {
+                        System.out.println("Some Problem");
+                        e.printStackTrace();
+                    }
+                }
+                @Override public void onCancelled(DatabaseError error) { }
+            });
+
         }
-        progressDialog=new ProgressDialog(this);
-        editTextEmail=(EditText)findViewById(R.id.editTextEmail);
-        editTextPassword=(EditText)findViewById(R.id.editTextPassword);
-        buttonSignin=(Button)findViewById(R.id.buttonSignin);
-        textViewSignup=(TextView) findViewById(R.id.textVeiwSignup);
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        progressDialog = new ProgressDialog(this);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        buttonSignin = (Button) findViewById(R.id.buttonSignin);
+        textViewSignup = (TextView) findViewById(R.id.textVeiwSignup);
 
         buttonSignin.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+
     }
 
     @Override
