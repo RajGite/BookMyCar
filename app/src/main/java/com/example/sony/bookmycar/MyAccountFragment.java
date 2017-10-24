@@ -34,10 +34,12 @@ public class MyAccountFragment extends Fragment {
         /*Error
          java.lang.NullPointerException: Attempt to invoke
          virtual method 'android.view.View android.view.View.findViewById(int)' on a null object reference*/
-        name=(TextView)getView().findViewById(R.id.name);
-        address=(TextView)getView().findViewById(R.id.address);
-        mobno=(TextView)getView().findViewById(R.id.mobno);
-        email=(TextView)getView().findViewById(R.id.email);
+        myView=inflater.inflate(R.layout.my_account_layout,container, false);
+
+        name=(TextView)myView.findViewById(R.id.name);
+        address=(TextView)myView.findViewById(R.id.address);
+        mobno=(TextView)myView.findViewById(R.id.mobno);
+        email=(TextView)myView.findViewById(R.id.email);
 
         firebaseAuth= FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -63,7 +65,6 @@ public class MyAccountFragment extends Fragment {
             });
 
         }
-        myView=inflater.inflate(R.layout.my_account_layout,container, false);
         return myView;
     }
 }
