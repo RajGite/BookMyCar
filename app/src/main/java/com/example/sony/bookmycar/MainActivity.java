@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firebaseDatabase = FirebaseDatabase.getInstance();
         dataBaseReference = firebaseDatabase.getReference();
 
+        setTitle("Sign Up");
         if(firebaseAuth.getCurrentUser()!=null)
         {
             //start passenger or driver activity accordingly
