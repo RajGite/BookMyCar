@@ -28,11 +28,12 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.2.0'
     compile 'com.android.support:design:24.2.1'
 
-    /*
-    compile 'com.google.android.gms:play-services-maps:11.2.0'
-    compile 'com.google.android.gms:play-services-location:11.2.0'
-    compile 'com.google.android.gms:play-services-places:11.2.0'
-    compile 'com.google.android.gms:play-services-plus:11.2.0'*/
+
+    compile 'com.google.android.gms:play-services-maps:9.2.0'
+    compile 'com.google.android.gms:play-services-location:9.2.0'
+    compile 'com.google.android.gms:play-services-places:9.2.0'
+    compile 'com.google.android.gms:play-services-plus:9.2.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

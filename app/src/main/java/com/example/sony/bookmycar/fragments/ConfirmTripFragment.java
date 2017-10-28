@@ -26,8 +26,8 @@ public class ConfirmTripFragment extends Fragment {
     EditText daysEditText;
     Button calcFareButton,nextButton;
     TextView result;
-    double fare = 0.0;
-
+    String fare;
+    double days;
     public static ConfirmTripFragment newInstance(){
         return new ConfirmTripFragment();
     }
@@ -54,12 +54,19 @@ public class ConfirmTripFragment extends Fragment {
         daysEditText = (EditText)view.findViewById(R.id.daysEditText);
         calcFareButton = (Button)view.findViewById(R.id.calcFareButton);
         result = (TextView)view.findViewById(R.id.result);
+
         calcFareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fare = 0.0;
                 //calculate fare
-
+                days=Double.parseDouble(daysEditText.getText().toString());
+                if(spinner.getSelectedItem().toString().equals("Normal")){
+                    fare=Double.toString((trip.getDistance()*10)+days*500);
+                }else if(spinner.getSelectedItem().toString().equals("Sedan")){
+                    fare=Double.toString((trip.getDistance()*13)+days*500);
+                }else if(spinner.getSelectedItem().toString().equals("SUV")){
+                    fare=Double.toString((trip.getDistance()*15)+days*500);
+                }
                 result.setText("Fare = "+fare);
             }
         });

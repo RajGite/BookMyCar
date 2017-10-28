@@ -9,8 +9,13 @@ import java.util.HashMap;
  * Created by SONY on 25-10-2017.
  */
 public class TripModel implements Parcelable{
-    private String carType,address,startDate;
-    private double latitude,longitude,fare;
+    private String carType;
+    private String startaddress;
+    private String destinationaddress;
+    private String startDate;
+    private String fare;
+    private double latitude,longitude;
+    private float distance;
     private int numOfDays;
     private UserInformation driver;
 
@@ -21,6 +26,10 @@ public class TripModel implements Parcelable{
         HashMap<String,Object> map = new HashMap<>();
         map.put("carType",carType);
         map.put("fare",fare);
+        map.put("start-address",startaddress);
+        map.put("destination-address",destinationaddress);
+        map.put("date",startDate);
+        map.put("days",numOfDays);
         //map.put("driver",driver.getName());
         return map;
     }
@@ -33,11 +42,11 @@ public class TripModel implements Parcelable{
         this.startDate = startDate;
     }
 
-    public double getFare() {
+    public String getFare() {
         return fare;
     }
 
-    public void setFare(double fare) {
+    public void setFare(String fare) {
         this.fare = fare;
     }
 
@@ -55,14 +64,6 @@ public class TripModel implements Parcelable{
 
     public void setCarType(String carType) {
         this.carType = carType;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public double getLatitude() {
@@ -98,22 +99,26 @@ public class TripModel implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.carType);
-        dest.writeString(this.address);
+        dest.writeString(this.startaddress);
+        dest.writeString(this.destinationaddress);
         dest.writeString(this.startDate);
         dest.writeDouble(this.latitude);
         dest.writeDouble(this.longitude);
-        dest.writeDouble(this.fare);
+        dest.writeString(this.fare);
         dest.writeInt(this.numOfDays);
+        dest.writeFloat(this.distance);
         dest.writeParcelable(this.driver, flags);
     }
 
     protected TripModel(Parcel in) {
         this.carType = in.readString();
-        this.address = in.readString();
+        this.distance=in.readFloat();
+        this.startaddress = in.readString();
+        this.destinationaddress = in.readString();
         this.startDate = in.readString();
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
-        this.fare = in.readDouble();
+        this.fare = in.readString();
         this.numOfDays = in.readInt();
         this.driver = in.readParcelable(UserInformation.class.getClassLoader());
     }
@@ -129,4 +134,27 @@ public class TripModel implements Parcelable{
             return new TripModel[size];
         }
     };
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    public void setStartaddress(String startaddress) {
+        this.startaddress = startaddress;
+    }
+    public String getStartaddress() {
+        return startaddress;
+    }
+
+    public String getDestinationaddress() {
+        return destinationaddress;
+    }
+
+    public void setDestinationaddress(String destinationaddress) {
+        this.destinationaddress = destinationaddress;
+    }
 }
