@@ -104,7 +104,8 @@ public class Passenger extends AppCompatActivity
         if (id == R.id.nav_home_layout) {
             //fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
         } else if (id == R.id.nav_my_account_layout) {
-            //fragmentManager.beginTransaction().replace(R.id.content_frame, new MyAccountFragment()).commit();
+            startActivity(new Intent(Passenger.this,CreateAccountActivity.class));
+            //fragmentManager.beginTransaction().replace(R.id.recyclerView, new MyAccountFragment()).commit();
         } else if (id == R.id.nav_logout_layout) {
             //fragmentManager.beginTransaction().replace(R.id.content_frame, new LogoutFragment()).commit();
             AlertDialog.Builder builder = new AlertDialog.Builder(Passenger.this);
@@ -174,6 +175,7 @@ public class Passenger extends AppCompatActivity
                         trip.setStartaddress((String)snapshot.child("start-address").getValue());
                         trip.setDestinationaddress((String)snapshot.child("destination-address").getValue());
                         trip.setNumOfDays(((Long)snapshot.child("days").getValue()).intValue());
+                        trip.setStartDate((String)snapshot.child("date").getValue());
                         trip.setCarType((String)snapshot.child("carType").getValue());
                         trip.setFare((String)snapshot.child("fare").getValue());
                         tripModels.add(trip);

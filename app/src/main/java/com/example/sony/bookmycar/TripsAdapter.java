@@ -46,7 +46,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         holder.addressTextView1.setText(trip.getStartaddress());
         holder.addressTextView2.setText(trip.getDestinationaddress());
         holder.fareTextView.setText(trip.getFare());
-        //holder.dateTextView.setText(trip.getStartDate());
+        holder.dateTextView.setText(trip.getStartDate());
         //driver
     }
 

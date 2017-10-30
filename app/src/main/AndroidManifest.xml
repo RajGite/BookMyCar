@@ -35,6 +35,9 @@
             android:label="@string/title_activity_passenger"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity android:name=".CreateAccountActivity"
+            android:parentActivityName=".Passenger"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/API_KEY"/>

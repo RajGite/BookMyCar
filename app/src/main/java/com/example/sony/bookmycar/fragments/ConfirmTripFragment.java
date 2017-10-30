@@ -24,6 +24,7 @@ public class ConfirmTripFragment extends Fragment {
     TripModel trip;
     AppCompatSpinner spinner;
     EditText daysEditText;
+    EditText editTextdate;
     Button calcFareButton,nextButton;
     TextView result;
     String fare;
@@ -52,6 +53,7 @@ public class ConfirmTripFragment extends Fragment {
 
         spinner = (AppCompatSpinner) view.findViewById(R.id.spinner);
         daysEditText = (EditText)view.findViewById(R.id.daysEditText);
+        editTextdate=(EditText)view.findViewById(R.id.editTextdate);
         calcFareButton = (Button)view.findViewById(R.id.calcFareButton);
         result = (TextView)view.findViewById(R.id.result);
 
@@ -85,6 +87,7 @@ public class ConfirmTripFragment extends Fragment {
     private void validate(TripModel trip){
         trip.setCarType(spinner.getSelectedItem().toString());
         trip.setNumOfDays(Integer.parseInt(daysEditText.getText().toString()));
+        trip.setStartDate(editTextdate.getText().toString());
         trip.setFare(fare);
     }
 }
